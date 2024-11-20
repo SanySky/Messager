@@ -13,6 +13,6 @@ async def send_massage(message: Message, user: User = Depends()):
         "messages", {
             "room_id": message.room_id,
             "content": message.content,
-            "user": user.content
+            "user": user.username
         }
     )
