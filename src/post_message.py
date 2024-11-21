@@ -1,7 +1,7 @@
 from fastapi import Depends, WebSocket, WebSocketDisconnect
 from faststream.rabbit.fastapi import RabbitRouter
 from models import User
-from routers import router
+from main import router
 
 connected_users = {}
 
