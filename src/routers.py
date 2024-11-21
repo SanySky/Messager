@@ -6,8 +6,8 @@ from faststream.rabbit.fastapi import RabbitRouter
 router = RabbitRouter("amqp://guest:guest@localhost:5672/")
 
 
-@router.post('/massage')
-async def send_massage(message: Message, user: User = Depends()):
+@router.post('/message')
+async def send_message(message: Message, user: User = Depends()):
     """Функция отправляет сообщение в RabbitMQ"""
     await router.publish(
         "messages", {
