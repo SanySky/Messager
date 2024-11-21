@@ -3,21 +3,19 @@ from faststream.rabbit import RabbitQueue
 from faststream.rabbit.fastapi import RabbitRouter
 from models import Message, User
 
-
 router = RabbitRouter("amqp://guest:guest@localhost:5672/")
 
 app = FastAPI()
 broker = router.broker
 
 
-# Подключение брокера
 async def connect_broker():
     try:
         await broker.connect()
     except Exception as e:
         print(f"Ошибка при подключении к брокеру: {e}")
 
-# Создание очереди
+
 async def create_queue():
     try:
         await broker.declare_queue(RabbitQueue("message"))
@@ -26,8 +24,8 @@ async def create_queue():
 
 @app.on_event("startup")
 async def startup_event():
-    await connect_broker()  # Подключаем брокер
-    await create_queue()     # Создаем очередь
+    await connect_broker()
+    await create_queue()
 
 @app.post('/message')
 async def send_message(message: Message, user: User = Depends()):
